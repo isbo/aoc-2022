@@ -32,8 +32,5 @@ func overlaps(f []string) bool {
 		v, _ := strconv.Atoi(e)
 		n[i] = v
 	}
-	return (n[1] >= n[2] && n[1] <= n[3]) ||
-		(n[0] >= n[2] && n[0] <= n[3]) ||
-		(n[0] <= n[2] && n[3] <= n[1]) ||
-		(n[0] >= n[2] && n[1] <= n[3])
+	return n[2] <= n[1] && n[0] <= n[3]
 }
