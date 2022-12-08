@@ -9,11 +9,11 @@ import (
 	"strings"
 )
 
-func parseCrates(lines []string) []Stack {
+func parseCrates(lines []string) []Stack[byte] {
 	lastIdx := len(lines) - 1
 	last := strings.TrimSpace(lines[lastIdx])
 	n, _ := strconv.Atoi(last[strings.LastIndex(last, " ")+1:])
-	crates := make([]Stack, n)
+	crates := make([]Stack[byte], n)
 
 	for i := lastIdx - 1; i >= 0; i-- {
 		line := lines[i]
@@ -33,7 +33,7 @@ func main() {
 
 	scanner := bufio.NewScanner(file)
 	var lines []string
-	var crates []Stack
+	var crates []Stack[byte]
 	var parsed = false
 	for scanner.Scan() {
 		line := scanner.Text()
