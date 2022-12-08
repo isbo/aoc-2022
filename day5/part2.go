@@ -20,7 +20,7 @@ func parseCrates(lines []string) []Stack[byte] {
 		for j := 0; j < n; j++ {
 			crate := line[j*4+1]
 			if crate != ' ' {
-				crates[j] = crates[j].Push(crate)
+				crates[j].Push(crate)
 			}
 		}
 	}
@@ -52,16 +52,16 @@ func main() {
 		var v byte
 		var toMove []byte
 		for i := 0; i < num; i++ {
-			crates[from-1], v = crates[from-1].Pop()
+			v = crates[from-1].Pop()
 			toMove = append(toMove, v)
 		}
 		for i := len(toMove) - 1; i >= 0; i-- {
-			crates[to-1] = crates[to-1].Push(toMove[i])
+			crates[to-1].Push(toMove[i])
 		}
 	}
 	var out strings.Builder
 	for _, crate := range crates {
-		_, v := crate.Pop()
+		v := crate.Pop()
 		out.WriteByte(v)
 	}
 	fmt.Println("top crates ", out.String())

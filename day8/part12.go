@@ -77,12 +77,12 @@ func findMostScenic(t [][]uint8) int {
 		// total of adds/removals from stack is O(n) because an element can be added or removed at most one time.
 
 		var s = new(Stack[int])
-		*s = s.Push(0)
+		s.Push(0)
 		for c := 1; c < w-1; c++ {
 			var dist = 1
 			if t[r][c] > t[r][c-1] {
 				for !s.Empty() && t[r][s.Peek()] < t[r][c] {
-					*s, _ = s.Pop()
+					s.Pop()
 				}
 				var i = 0
 				if !s.Empty() {
@@ -90,16 +90,16 @@ func findMostScenic(t [][]uint8) int {
 				}
 				dist = c - i
 			}
-			*s = s.Push(c)
+			s.Push(c)
 			d[r][c] *= dist
 		}
 		s = new(Stack[int])
-		*s = s.Push(w - 1)
+		s.Push(w - 1)
 		for c := w - 2; c > 0; c-- {
 			var dist = 1
 			if t[r][c] > t[r][c+1] {
 				for !s.Empty() && t[r][s.Peek()] < t[r][c] {
-					*s, _ = s.Pop()
+					s.Pop()
 				}
 				var i = w - 1
 				if !s.Empty() {
@@ -107,19 +107,19 @@ func findMostScenic(t [][]uint8) int {
 				}
 				dist = i - c
 			}
-			*s = s.Push(c)
+			s.Push(c)
 			d[r][c] *= dist
 		}
 	}
 	// in each row, compute top and bottom viewing distances
 	for c := 1; c < w-1; c++ {
 		var s = new(Stack[int])
-		*s = s.Push(0)
+		s.Push(0)
 		for r := 1; r < h-1; r++ {
 			var dist = 1
 			if t[r][c] > t[r-1][c] {
 				for !s.Empty() && t[s.Peek()][c] < t[r][c] {
-					*s, _ = s.Pop()
+					s.Pop()
 				}
 				var i = 0
 				if !s.Empty() {
@@ -127,17 +127,17 @@ func findMostScenic(t [][]uint8) int {
 				}
 				dist = r - i
 			}
-			*s = s.Push(r)
+			s.Push(r)
 			d[r][c] *= dist
 		}
 
 		s = new(Stack[int])
-		*s = s.Push(h - 1)
+		s.Push(h - 1)
 		for r := h - 2; r > 0; r-- {
 			var dist = 1
 			if t[r][c] > t[r+1][c] {
 				for !s.Empty() && t[s.Peek()][c] < t[r][c] {
-					*s, _ = s.Pop()
+					s.Pop()
 				}
 				var i = h - 1
 				if !s.Empty() {
@@ -145,7 +145,7 @@ func findMostScenic(t [][]uint8) int {
 				}
 				dist = i - r
 			}
-			*s = s.Push(r)
+			s.Push(r)
 			d[r][c] *= dist
 		}
 	}
