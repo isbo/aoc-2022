@@ -39,7 +39,6 @@ func part1(insts []string) int {
 
 func part2(insts []string) {
 	vals := getXValues(insts)
-	fmt.Println(vals)
 	var cycle = 1
 	for r := 0; r < 6; r++ {
 		for p := 0; p < 40; p++ {
